@@ -309,7 +309,7 @@
     </inertial>
   </link>  
 
-  <link name="mountingConnection">
+<!--  <link name="mountingConnection">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -321,7 +321,7 @@
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry> -->
 	<!--box size="${width} ${width} ${height2}"/-->
-	<mesh filename="package://abb_common/meshes/irb120/visual/mountingConnection.stl" scale="0.001 0.001 0.001"/>
+<!--	<mesh filename="package://abb_common/meshes/irb120/visual/mountingConnection.stl" scale="0.001 0.001 0.001"/>
 	
       </geometry>
       <material name="red"/>
@@ -335,7 +335,7 @@
 	  iyy="1.0" iyz="0.0"
 	  izz="1.0"/>
     </inertial>
-  </link> 
+  </link> -->
 
   <link name="upperMount">
     <collision>
@@ -393,37 +393,37 @@
     </inertial>
   </link> 
 
-  <joint name="firstEffector" type="continuous">
+  <joint name="firstEffector" type="fixed">
     <parent link="link7"/>
     <child link="bottomMount"/>
-    <origin rpy="0 0 0" xyz="0.072 0 0"/>
+    <origin rpy="0 1.5 0" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
   </joint> 
 
-  <joint name="middleConnector" type="continuous">
+ <!-- <joint name="middleConnector" type="fixed">
     <parent link="bottomMount"/>
     <child link="mountingConnection"/>
     <origin rpy="0 0 0" xyz="0.072 0 0"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
-  </joint> 
+  </joint> -->
 
-  <joint name="touchesEnd" type="continuous">
-    <parent link="mountingConnection"/>
+  <joint name="touchesEnd" type="fixed">
+    <parent link="bottomMount"/>
     <child link="upperMount"/>
-    <origin rpy="0 0 0" xyz="0.072 0 0"/>
+    <origin rpy="0 0 0" xyz="0 0 -.02"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
   </joint> 
 
-  <joint name="endEffector" type="continuous">
+  <joint name="endEffector" type="fixed">
     <parent link="upperMount"/>
     <child link="paint_gun"/>
-    <origin rpy="0 0 0" xyz="0.072 0 0"/>
+    <origin rpy="0 -1.5 3.14" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
@@ -494,7 +494,7 @@
     </actuator>
   </transmission> 
 
-  <transmission name="tran7">
+ <!-- <transmission name="tran7">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="firstEffector">
       <hardwareInterface>EffortJointInterface</hardwareInterface>
@@ -536,6 +536,6 @@
       <hardwareInterface>EffortJointInterface</hardwareInterface>
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
-  </transmission> 
+  </transmission> -->
  
 </robot>
