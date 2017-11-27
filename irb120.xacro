@@ -11,7 +11,7 @@
   #<xacro:property name="camera_link" value="0.05" /> <!-- Size of square 'camera' box -->
   #<xacro:property name="axel_offset" value="0.05" /> <!-- Space btw top of beam and the each joint -->
 
-  <!-- Import all Gazebo-customization elements, including Gazebo colors -->
+  <!-- Import all Gazebo-customization elements, including Gazebos -->
   <xacro:include filename="$(find abby_description)/urdf/irb120.gazebo" />
   <!-- Import Rviz colors -->
   <xacro:include filename="$(find abby_description)/urdf/materials.xacro" />
@@ -26,28 +26,9 @@
 
   <!-- Base Link -->
   <link name="link1">
-    <!--collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision-->
-
-    <!--visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://abb_common/meshes/irb120/visual/base_link.stl"/>
-      </geometry>
-      <material name="abb_orange">
-        <color rgba="1 0.43 0 1"/>
-      </material>      
-    </visua-->
-
     <visual>
-      <!--origin xyz="0 0 ${height1/2}" rpy="0 0 0"/-->
        <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-	<!--box size="${width} ${width} ${height1}"/-->
 	       <mesh filename="package://abb_common/meshes/irb120/visual/base_link.stl"/>
       </geometry>
       <material name="orange"/>
@@ -74,17 +55,10 @@
 
   <!-- Middle Link -->
   <link name="link2">
-    <!--collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision-->
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-	<!--box size="${width} ${width} ${height2}"/-->
 	<mesh filename="package://abb_common/meshes/irb120/collision/link_1.stl"/>
       </geometry>
       <material name="black"/>
@@ -291,12 +265,9 @@
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> -->
-	<!--box size="${width} ${width} ${height2}"/-->
+      <geometry> 
 	<mesh filename="package://abb_common/meshes/irb120/visual/bottomMount.stl" scale="0.001 0.001 0.001"/>
-	
       </geometry>
-      <material name="red"/>
     </visual>
 
     <inertial>
@@ -309,7 +280,7 @@
     </inertial>
   </link>  
 
-<!--  <link name="mountingConnection">
+  <link name="LBracket">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -319,12 +290,9 @@
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> -->
-	<!--box size="${width} ${width} ${height2}"/-->
-<!--	<mesh filename="package://abb_common/meshes/irb120/visual/mountingConnection.stl" scale="0.001 0.001 0.001"/>
-	
+      <geometry>
+	<mesh filename="package://abb_common/meshes/irb120/visual/LBracket.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="red"/>
     </visual>
 
     <inertial>
@@ -335,9 +303,9 @@
 	  iyy="1.0" iyz="0.0"
 	  izz="1.0"/>
     </inertial>
-  </link> -->
-
-  <link name="upperMount">
+  </link> 
+   
+ <link name="upperMount">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
@@ -347,12 +315,9 @@
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> -->
-	<!--box size="${width} ${width} ${height2}"/-->
-	<mesh filename="package://abb_common/meshes/irb120/visual/upperMount.stl" scale="0.001 0.001 0.001"/>
-	
+      <geometry> 
+	<mesh filename="package://abb_common/meshes/irb120/visual/upperMount.stl" scale="0.001 0.001 0.001"/>	
       </geometry>
-      <material name="red"/>
     </visual>
 
     <inertial>
@@ -375,13 +340,10 @@
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> -->
-	<!--box size="${width} ${width} ${height2}"/-->
+      <geometry>
 	<mesh filename="package://abb_common/meshes/irb120/visual/288048_CAD_model.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="gun"/>
-      	<color rgba = "0 0 128 1"/>
-      </material>
+     <material name="blue"/>
     </visual>
 
     <inertial>
@@ -404,13 +366,10 @@
 
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> -->
-	<!--box size="${width} ${width} ${height2}"/-->
+      <geometry>
 	<mesh filename="package://abb_common/meshes/irb120/visual/paintTriangle.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-      <material name="paint"/>
-      	<color rgba = "255 0 0 1"/>
-      </material>
+      <material name="red"/>   
     </visual>
 
     <inertial>
@@ -432,23 +391,23 @@
     <dynamics damping="0.7"/>
   </joint> 
 
- <!-- <joint name="middleConnector" type="fixed">
+  <joint name="middle" type="fixed">
     <parent link="bottomMount"/>
-    <child link="mountingConnection"/>
-    <origin rpy="0 0 0" xyz="0.072 0 0"/>
-    <axis xyz="1 0 0"/>
-     <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
-    <dynamics damping="0.7"/>
-  </joint> -->
-
-  <joint name="touchesEnd" type="fixed">
-    <parent link="bottomMount"/>
-    <child link="upperMount"/>
+    <child link="LBracket"/>
     <origin rpy="0 0 0" xyz="0 0 -.02"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
   </joint> 
+
+  <joint name="touchesEnd" type="fixed">
+    <parent link="LBracket"/>
+    <child link="upperMount"/>
+    <origin rpy="0 0 0" xyz="0 0 -.02"/>
+    <axis xyz="1 0 0"/>
+     <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
+    <dynamics damping="0.7"/>
+  </joint>
 
   <joint name="endEffector" type="fixed">
     <parent link="upperMount"/>
@@ -532,49 +491,4 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission> 
-
- <!-- <transmission name="tran7">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="firstEffector">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor7">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission> 
-
-  <transmission name="tran8">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="middleConnector">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor8">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission> 
-
-  <transmission name="tran9">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="touchesEnd">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor9">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission> 
-
-  <transmission name="tran10">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="endEffector">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="motor10">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission> -->
- 
 </robot>
