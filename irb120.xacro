@@ -233,7 +233,7 @@
 	<!--box size="${width} ${width} ${height3}"/-->
 	        <mesh filename="package://abb_common/meshes/irb120/visual/link_6.stl"/>
       </geometry>
-      <material name="orange"/>
+      <material name="grey"/>
     </visual>
 
     <inertial>
@@ -255,31 +255,6 @@
     <dynamics damping="0.7"/>
   </joint>
 
-  <link name="bottomMount">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> 
-	<mesh filename="package://abb_common/meshes/irb120/visual/bottomMount.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </visual>
-
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="1"/>
-      <inertia
-	  ixx="1.0" ixy="0.0" ixz="0.0"
-	  iyy="1.0" iyz="0.0"
-	  izz="1.0"/>
-    </inertial>
-  </link>  
-
   <link name="LBracket">
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -289,35 +264,11 @@
     </collision>
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
       <geometry>
 	<mesh filename="package://abb_common/meshes/irb120/visual/LBracket.stl" scale="0.001 0.001 0.001"/>
       </geometry>
-    </visual>
-
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="1"/>
-      <inertia
-	  ixx="1.0" ixy="0.0" ixz="0.0"
-	  iyy="1.0" iyz="0.0"
-	  izz="1.0"/>
-    </inertial>
-  </link> 
-   
- <link name="upperMount">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry> 
-	<mesh filename="package://abb_common/meshes/irb120/visual/upperMount.stl" scale="0.001 0.001 0.001"/>	
-      </geometry>
+	<material name="white"/>
     </visual>
 
     <inertial>
@@ -339,7 +290,7 @@
     </collision>
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0.02 -0.025 0.0525" rpy="1.57 1.5 0"/>
       <geometry>
 	<mesh filename="package://abb_common/meshes/irb120/visual/288048_CAD_model.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -365,7 +316,7 @@
     </collision>
 
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="-3.14 0 0"/>
       <geometry>
 	<mesh filename="package://abb_common/meshes/irb120/visual/paintTriangle.stl" scale="0.001 0.001 0.001"/>
       </geometry>
@@ -382,43 +333,25 @@
     </inertial>
   </link> 
 
-  <joint name="firstEffector" type="fixed">
+  <joint name="firstEffector" type="continuous">
     <parent link="link7"/>
-    <child link="bottomMount"/>
+    <child link="LBracket"/>
     <origin rpy="0 1.5 0" xyz="0 0 0"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
   </joint> 
 
-  <joint name="middle" type="fixed">
-    <parent link="bottomMount"/>
-    <child link="LBracket"/>
-    <origin rpy="0 0 0" xyz="0 0 -.02"/>
-    <axis xyz="1 0 0"/>
-     <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
-    <dynamics damping="0.7"/>
-  </joint> 
-
-  <joint name="touchesEnd" type="fixed">
+  <joint name="touchesEnd" type="continuous">
     <parent link="LBracket"/>
-    <child link="upperMount"/>
-    <origin rpy="0 0 0" xyz="0 0 -.02"/>
-    <axis xyz="1 0 0"/>
-     <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
-    <dynamics damping="0.7"/>
-  </joint>
-
-  <joint name="endEffector" type="fixed">
-    <parent link="upperMount"/>
     <child link="paint_gun"/>
-    <origin rpy="0 -1.5 3.14" xyz="0 0 0"/>
+    <origin rpy="0 0 0" xyz="0 0 -.02"/>
     <axis xyz="1 0 0"/>
      <limit effort="20" lower="-6.98132" upper="6.98132" velocity="7.33038"/>   
     <dynamics damping="0.7"/>
   </joint> 
 
-  <joint name="paintCloud" type="fixed">
+  <joint name="paintCloud" type="continuous">
     <parent link="paint_gun"/>
     <child link="paintTriangle"/>
     <origin rpy="0 -1.5 3.14" xyz="0 0 0"/>
